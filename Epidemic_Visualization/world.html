@@ -370,7 +370,7 @@
 	        });
 	</script>
     <div class="divider" style=""></div>	
-	<div id="main01" style="width: 1000px;height:600px;margin: 0 auto;"></div>
+	<div id="main01" style="width: 1500px;height:800px;margin: 0 auto;"></div>
     <script type="text/javascript">
 		var Confirms=[];
 		var date= [];
@@ -533,10 +533,10 @@
 		                            }
 		                        },
 		                    }],
-		                    geo: {
+		                    geo: {  <!-- 地图的位置 -->
 		                        map: 'world',
-		                        right: '35%',
-		                        left: '5%',
+		                        right: '5%',
+		                        left: '20%',
 		                        label: {
 		                            emphasis: {
 		                                show: false,
@@ -617,12 +617,12 @@
 		                        },
 		                        {
 		                            show: true,
-		                            text: '确诊人数前十的省份',
+		                            text: '确诊人数前十的国家',
 		                            textStyle: {
 		                                color: '#2D3E53',
 		                                fontSize: 18
 		                            },
-		                            right: '10%',
+		                            right: '1%',
 		                            top: '15%'
 		                        }
 		                    ],
@@ -631,11 +631,13 @@
 		                    },
 		                    series: [{
 		                        type: 'map',
-		                        data: res
+		                        data: res,
+								
 		                    }, 
 		                    {
 		                        type: 'bar',
 		                        data: res2,
+								
 		                        itemStyle: {
 		                            normal: {
 		                                color: function(params) {
