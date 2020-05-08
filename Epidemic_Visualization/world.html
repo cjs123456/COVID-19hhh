@@ -217,8 +217,8 @@
         <nav class="navbar-default navbar-side" role="navigation">
             <div class="sidebar-collapse">
                 <ul class="nav" id="main-menu">
-                     <li>
-		                <a href="index.html" class="active-menu waves-effect waves-dark" style="font-size: 18px;margin-bottom: 10px"><i class="fa fa-dashboard"></i>全国疫情</a>
+                      <li>
+		                <a href="index.html" class="waves-effect waves-dark" style="font-size: 18px;margin-bottom: 10px"><i class="fa fa-dashboard"></i>全国疫情</a>
 		            </li>
 		              <li>
 		                <a href="chart.html" class="waves-effect waves-dark"style="font-size: 18px;margin-bottom: 10px"><i class="fa fa-bar-chart-o"></i>各省疫情</a>
@@ -234,7 +234,7 @@
                         <a href="mytable.html" class="waves-effect waves-dark" style="font-size: 18px"><i class="fa fa-table"></i> 数据概况</a>
                     </li>
                     <li>
-                        <a href="form.html" class="waves-effect waves-dark"><i class="fa fa-edit"></i> Forms </a>
+                        <a href="world.html" class="active-menu  waves-effect waves-dark" style="font-size: 18px;margin-bottom: 10px"><i class="fa fa-bar-chart-o"></i>世界疫情 </a>
                     </li>
 
 
@@ -357,17 +357,18 @@
 			   </div>
 				<!-- /. ROW  -->
 	<script type="text/javascript">
-		 $.get('https://lab.isaaclin.cn/nCoV/api/area?latest=1&province=中国', function (data) {
+		 $.get('https://api.inews.qq.com/newsqa/v1/automation/modules/list?modules=FAutoGlobalStatis', function (data) {
 	                var mydata = typeof data=='string'?JSON.parse(data):data;                
-	                var confirmedCount = mydata.results[0].confirmedCount;
-	                var currentConfirmedCount = mydata.results[0].currentConfirmedCount;      
-	                var curedCount = mydata.results[0].curedCount;
-	                var deadCount = mydata.results[0].deadCount;
+	                var confirmedCount = mydata.data.FAutoGlobalStatis.nowConfirm;
+	                var currentConfirmedCount = mydata.data.FAutoGlobalStatis.confirm;      
+	                var curedCount = mydata.data.FAutoGlobalStatis.heal;
+	                var deadCount = mydata.data.FAutoGlobalStatis.dead;
 	                $("#num01").text(confirmedCount);
 	                $("#num02").text(currentConfirmedCount);
 	                $("#num03").text(curedCount);
 	                $("#num04").text(deadCount);
 	        });
+		
 	</script>
     <div class="divider" style=""></div>	
 	<div id="main01" style="width: 1500px;height:800px;margin: 0 auto;"></div>
@@ -600,7 +601,7 @@
 		                    res1[t] = res[res.length - 1 - t].name;
 		                    res2[t] = res[res.length - 1 - t].value;
 		                }
-		                console.log(res2);
+		                //console.log(res2);
 		                /*console.log(res1);   
 		                console.log(province);*/
 		                console.log("----------------");
