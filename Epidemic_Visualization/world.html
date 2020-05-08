@@ -208,7 +208,7 @@
 		
 	</script>
     <div class="divider" style=""></div>	
-	<div id="main01" style="width: 1600px;height:800px;margin: 0 auto;"></div>
+	<div id="main01" style="width: 1200px;height:650px;margin: 0 auto;"></div>
     <script type="text/javascript">
 		var Confirms=[];
 		var date= [];
@@ -288,43 +288,45 @@
 		                                color: '#BB0000'
 		                            },
 		                            {
-		                                min: 10001,
+		                                min: 50001,
 		                                max: 100000,
 		                                color: '#EE2C2C'
 		                            },
 		                               {
+		                                min: 10001,
+		                                max: 50000,
+		                                color: '#EE7600'
+		                            },
+		                            {
 		                                min: 5001,
 		                                max: 10000,
-		                                color: '#EE7600'
+		                                color: '#FF8C00'
 		                            },
 		                            {
 		                                min: 1001,
 		                                max: 5000,
-		                                color: '#FF8C00'
-		                            },
-		                            {
-		                                min: 201,
-		                                max: 1000,
 		                                color: '#FFD700'
 		                            },
 		                            {
 		                                min: 1,
-		                                max: 200,
+		                                max: 1000,
 		                                color: '#FFEC8B'
 		                            },
 		                            {
-		                                value: 0,
+		                                value: null,
 		                                color: 'white'
 		                            }
 		                        ],
 		                        orient: 'vertical',
-		                        itemWidth: 25,
-		                        itemHeight: 15,
+		                        itemWidth: 20,
+		                        itemHeight: 10,
 		                        showLabel: true,
 		                        seriesIndex: [0],
 
 		                        textStyle: {
-		                            color: '#7B93A7'
+		                            fontSize: 10,
+									color: '#7B93A7'
+									
 		                        },
 		                        bottom: '10%',
 		                        right: "1%",
@@ -354,7 +356,7 @@
 		                        axisLabel: {
 		                            //rotate:45,
 		                            textStyle: {
-		                                fontSize: 14,
+		                                fontSize: 10,
 		                                color: '#000000',
 		                            },
 		                            interval: 0
@@ -466,7 +468,7 @@
 		                            text: '确诊人数前十的国家',
 		                            textStyle: {
 		                                color: '#2D3E53',
-		                                fontSize: 18
+		                                fontSize: 14
 		                            },
 		                            left: '5%',
 		                            top: '40%'
