@@ -21,6 +21,7 @@
     <script src="assets/js/jquery-3.4.1.js"></script>
     <script src="assets/js/echarts.min.js"></script>
     <script src="assets/js/china.js"></script>
+	<script src="assets/js/world.js"></script> 
 
 </head>
 
@@ -233,7 +234,7 @@
                         <a href="mytable.html" class="waves-effect waves-dark" style="font-size: 18px"><i class="fa fa-table"></i> 数据概况</a>
                     </li>
                     <li>
-                        <a href="world.html" class="waves-effect waves-dark"><i class="fa fa-edit"></i>世界疫情 </a>
+                        <a href="form.html" class="waves-effect waves-dark"><i class="fa fa-edit"></i> Forms </a>
                     </li>
 
 
@@ -277,7 +278,7 @@
 	<div id="page-wrapper">
 		  <div class="header"> 
             <h1 class="page-header">
-           全国疫情数据可视化
+           全球疫情数据可视化
            </h1>
            <div class="divider" style=""></div>								
 		 </div>
@@ -369,7 +370,7 @@
 	        });
 	</script>
     <div class="divider" style=""></div>	
-	<div id="main01" style="width: 1000px;height:600px;margin: 0 auto;"></div>
+	<div id="main01" style="width: 1500px;height:800px;margin: 0 auto;"></div>
     <script type="text/javascript">
 		var Confirms=[];
 		var date= [];
@@ -532,10 +533,10 @@
 		                            }
 		                        },
 		                    }],
-		                    geo: {
-		                        map: 'china',
-		                        right: '35%',
-		                        left: '5%',
+		                    geo: {  <!-- 地图的位置 -->
+		                        map: 'world',
+		                        right: '5%',
+		                        left: '20%',
 		                        label: {
 		                            emphasis: {
 		                                show: false,
@@ -550,7 +551,7 @@
 		                    series: [{
 		                            name: '累计确诊数',
 		                            type: 'map',
-		                            map: 'china',
+		                            map: 'world',
 		                            roam: false,
 		                            geoIndex: 0,
 		                            label: {
@@ -616,12 +617,12 @@
 		                        },
 		                        {
 		                            show: true,
-		                            text: '确诊人数前十的省份',
+		                            text: '确诊人数前十的国家',
 		                            textStyle: {
 		                                color: '#2D3E53',
 		                                fontSize: 18
 		                            },
-		                            right: '10%',
+		                            right: '1%',
 		                            top: '15%'
 		                        }
 		                    ],
@@ -630,11 +631,13 @@
 		                    },
 		                    series: [{
 		                        type: 'map',
-		                        data: res
+		                        data: res,
+								
 		                    }, 
 		                    {
 		                        type: 'bar',
 		                        data: res2,
+								
 		                        itemStyle: {
 		                            normal: {
 		                                color: function(params) {
