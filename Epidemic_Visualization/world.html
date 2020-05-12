@@ -192,8 +192,8 @@
 	<script type="text/javascript">
 		 $.get('https://api.inews.qq.com/newsqa/v1/automation/modules/list?modules=FAutoGlobalStatis', function (data) {
 	                var mydata = typeof data=='string'?JSON.parse(data):data;                
-	                var confirmedCount = mydata.data.FAutoGlobalStatis.nowConfirm;
-	                var currentConfirmedCount = mydata.data.FAutoGlobalStatis.confirm;      
+	                var confirmedCount = mydata.data.FAutoGlobalStatis.confirm;
+	                var currentConfirmedCount = mydata.data.FAutoGlobalStatis.nowConfirm;      
 	                var curedCount = mydata.data.FAutoGlobalStatis.heal;
 	                var deadCount = mydata.data.FAutoGlobalStatis.dead;
 	                $("#num01").text(confirmedCount);
