@@ -17,6 +17,7 @@
     <!-- Google Fonts-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
     <link rel="stylesheet" href="assets/js/Lightweight-Chart/cssCharts.css">
+    <!-- <script src="assets/js/jquery-latest.js"></script> -->
     <script src="assets/js/jquery-3.4.1.min.js"></script>
     <script src="assets/js/jquery-3.4.1.js"></script>
     <script src="assets/js/echarts.min.js"></script>
@@ -93,7 +94,7 @@
   <div id="page-wrapper">
       <div class="header"> 
             <h1 class="page-header">
-           全国疫情数据可视化
+           美国疫情数据可视化
            </h1>
            <div class="divider" style=""></div>               
      </div>
@@ -172,7 +173,7 @@
          </div>
         <!-- /. ROW  -->
   <script type="text/javascript">
-     $.get('https://lab.isaaclin.cn/nCoV/api/area?latest=1&province=中国', function (data) {
+     $.get('https://lab.isaaclin.cn/nCoV/api/area?latest=1&province=美国', function (data) {
                   var mydata = typeof data=='string'?JSON.parse(data):data;                
                   var confirmedCount = mydata.results[0].confirmedCount;
                   var currentConfirmedCount = mydata.results[0].currentConfirmedCount;      
@@ -189,12 +190,34 @@
     <script type="text/javascript">
     var Confirms=[];
     var date= [];
-    var province=['重庆','浙江','云南','新疆','香港','西藏','天津','台湾','四川','上海','陕西','山西','山东','青海','宁夏','内蒙古','辽宁','江西','江苏','吉林','湖南','湖北','黑龙江','河南','河北','海南','贵州','广西','广东','甘肃','福建','北京','澳门','安徽'];
+    var province=["阿拉斯加州","阿拉巴马州","阿肯色州","亚利桑那州","加利福尼亚州","科罗拉多州","康涅狄格州","特拉华州","佛罗里达州","乔治亚州（佐治亚州）","夏威夷州","爱荷华州（艾奥瓦州）（衣阿华州）","爱达荷州","伊利诺斯州","印第安纳州","堪萨斯州","肯塔基州","路易斯安那州","马萨诸塞州（麻省、麻州）","马里兰州","缅因州","密歇根州（密执安州）","明尼苏达州","密苏里州","密西西比州","蒙大拿州","北卡罗来纳州","北达科他州","内布拉斯加州","新罕布什尔州（新罕布夏州）","新泽西州","新墨西哥州","内华达州","纽约州","俄亥俄州","俄克拉荷马州","俄勒冈州","宾夕法尼亚州","罗得岛州（罗德岛州）","南卡罗来纳州  ","南达科他州","田纳西州","得克萨斯州","犹他州","弗吉尼亚州","佛蒙特州","华盛顿州","威斯康辛州（威斯康星州）","西弗吉尼亚州","怀俄明州"];
+    var state=["Alaska","Alabama","Arkansas","Arizona","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Iowa","Idaho","Illinois","Indiana","Kansas","Kentucky","Louisiana","Massachusetts","Maryland","Maine","Michigan","Minnesota","Missouri","Mississippi","Montana","North Carolina","North Dakota","Nebraska","New Hampshire Hampshire","New Jersey","New Mexico","Nevada","New York","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Virginia","Vermont","Washington","Wisconsin","West Virginia","Wyoming"];
         $.ajax({
             type:"GET",
-            url: "data/data_china2_date.csv",
+            url: "http://localhost:8081/COVID-19/USA/all", 
+            dataType: "json",  
             success: function(results) {
-                //转变为字符串
+            	var k=1;
+            	date[k-1]=3.12;
+            	Confirms[k-1] = new Array();
+            	for(var j = 0; j < 50; j++) {
+                    Confirms[k-1][j] = 0; //0表示只有一个空的红圈
+               	}
+               	var l=0;
+            	$.each(results,function(i,n){
+            		if (n.date!=date[k-1]){
+            			date[k]=n.date;
+            			Confirms[k] = new Array();
+            			for(var j = 0; j < 50; j++) {
+                                Confirms[k][j] = 0; //0表示只有一个空的红圈
+               			}
+               			k++;
+            		}
+            		if(l==50) l=0;
+                    Confirms[k-1][l]=n.confirm; 
+                    l++;
+            	});
+                /*//转变为字符串
                 var rs = new String(results);         
                 var n_date = 0;
                 rs=rs.split("\n");
@@ -225,7 +248,7 @@
                          Confirms[n_date]=Confirms[n_date].map(Number)
                     }                  
                     n_date++;
-                }
+                }*/
 
 
                 var days=date;
@@ -260,32 +283,32 @@
                         visualMap: {
                             type: 'piecewise',
                             pieces: [{
-                                    min: 2001,
+                                    min: 200001,
                                     color: '#BB0000'
                                 },
                                 {
-                                    min: 1001,
-                                    max: 2000,
+                                    min: 100001,
+                                    max: 200000,
                                     color: '#EE2C2C'
                                 },
                                    {
-                                    min: 501,
-                                    max: 1000,
+                                    min: 50001,
+                                    max: 100000,
                                     color: '#EE7600'
                                 },
                                 {
-                                    min: 251,
-                                    max: 500,
+                                    min: 25001,
+                                    max: 50000,
                                     color: '#FF8C00'
                                 },
                                 {
-                                    min: 51,
-                                    max: 250,
+                                    min: 5001,
+                                    max: 25000,
                                     color: '#FFD700'
                                 },
                                 {
                                     min: 1,
-                                    max: 50,
+                                    max: 5000,
                                     color: '#FFEC8B'
                                 },
                                 {
@@ -313,7 +336,7 @@
                         },
                         xAxis: {
                             min: 0,
-                            max: 4000,
+                            max: 300000,
                             show: false
                         },
                         yAxis: [{
@@ -397,10 +420,10 @@
 
                 for (var n = 0; n < data.length; n++) {
                     var res = [];
-                    for (j = 0; j < province.length; j++) {
+                    for (j = 0; j < state.length; j++) {
 
                         res.push({
-                            name: province[j],
+                            name: state[j],
                             value: data[n][j]            
                         });
                     }
@@ -432,7 +455,7 @@
                             },
                             {
                                 show: true,
-                                text: '确诊人数前十的省份',
+                                text: '确诊人数前十的州',
                                 textStyle: {
                                     color: '#2D3E53',
                                     fontSize: 18
@@ -494,12 +517,34 @@
     <script type="text/javascript">
     var Confirms=[];
     var date= [];
-    var province=['重庆','浙江','云南','新疆','香港','西藏','天津','台湾','四川','上海','陕西','山西','山东','青海','宁夏','内蒙古','辽宁','江西','江苏','吉林','湖南','湖北','黑龙江','河南','河北','海南','贵州','广西','广东','甘肃','福建','北京','澳门','安徽'];
+    var province=["阿拉斯加州","阿拉巴马州","阿肯色州","亚利桑那州","加利福尼亚州","科罗拉多州","康涅狄格州","特拉华州","佛罗里达州","乔治亚州（佐治亚州）","夏威夷州","爱荷华州（艾奥瓦州）（衣阿华州）","爱达荷州","伊利诺斯州","印第安纳州","堪萨斯州","肯塔基州","路易斯安那州","马萨诸塞州（麻省、麻州）","马里兰州","缅因州","密歇根州（密执安州）","明尼苏达州","密苏里州","密西西比州","蒙大拿州","北卡罗来纳州","北达科他州","内布拉斯加州","新罕布什尔州（新罕布夏州）","新泽西州","新墨西哥州","内华达州","纽约州","俄亥俄州","俄克拉荷马州","俄勒冈州","宾夕法尼亚州","罗得岛州（罗德岛州）","南卡罗来纳州  ","南达科他州","田纳西州","得克萨斯州","犹他州","弗吉尼亚州","佛蒙特州","华盛顿州","威斯康辛州（威斯康星州）","西弗吉尼亚州","怀俄明州"];
+    var state=["Alaska","Alabama","Arkansas","Arizona","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Iowa","Idaho","Illinois","Indiana","Kansas","Kentucky","Louisiana","Massachusetts","Maryland","Maine","Michigan","Minnesota","Missouri","Mississippi","Montana","North Carolina","North Dakota","Nebraska","New Hampshire Hampshire","New Jersey","New Mexico","Nevada","New York","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Virginia","Vermont","Washington","Wisconsin","West Virginia","Wyoming"];
         $.ajax({
             type:"GET",
-            url: "data/data_china2_date.csv",
+            url: "http://localhost:8081/COVID-19/USA/all",
+            dataType: "json",  
             success: function(results) {
-                //转变为字符串
+            	var k=1;
+            	date[k-1]=3.12;
+            	Confirms[k-1] = new Array();
+            	for(var j = 0; j < 50; j++) {
+                    Confirms[k-1][j] = 0; //0表示只有一个空的红圈
+               	}
+               	var l=0;
+            	$.each(results,function(i,n){
+            		if (n.date!=date[k-1]){
+            			date[k]=n.date;
+            			Confirms[k] = new Array();
+            			for(var j = 0; j < 50; j++) {
+                                Confirms[k][j] = 0; //0表示只有一个空的红圈
+               			}
+               			k++;
+            		}
+            		if(l==50) l=0;
+                    Confirms[k-1][l]=n.heal; 
+                    l++;
+            	});
+                /*//转变为字符串
                 var rs = new String(results);         
                 var n_date = 0;
                 rs=rs.split("\n");
@@ -528,7 +573,7 @@
                          Confirms[n_date]=Confirms[n_date].map(Number)
                     }                  
                     n_date++;
-                }
+                }*/
 
 
                 var days=date;
@@ -563,32 +608,32 @@
                         visualMap: {
                             type: 'piecewise',
                             pieces: [{
-                                    min: 2001,
+                                    min: 50001,
                                     color: '#008B00'
                                 },
                                 {
-                                    min: 1001,
-                                    max: 2000,
+                                    min: 25001,
+                                    max: 50000,
                                     color: '#00CD00'
                                 },
                                 {
-                                    min: 501,
-                                    max: 1000,
+                                    min: 10001,
+                                    max: 25000,
                                     color: '#00EE00'
                                 },
                                 {
-                                    min: 251,
-                                    max: 500,
+                                    min: 5001,
+                                    max: 10000,
                                     color: '#00FF00'
                                 },
                                 {
-                                    min: 51,
-                                    max: 250,
+                                    min: 1001,
+                                    max: 5000,
                                     color: '#00FF7F'
                                 },
                                 {
                                     min: 1,
-                                    max: 50,
+                                    max: 1000,
                                     color: '#97FFFF'
                                 },
                                 {
@@ -616,7 +661,7 @@
                         },
                         xAxis: {
                             min: 0,
-                            max: 4000,
+                            max: 50000,
                             show: false
                         },
                         yAxis: [{
@@ -654,7 +699,7 @@
                         geo: {
                             map: '美国',
                             right: '35%',
-                            left: '45%',
+                            left: '5%',
                             label: {
                                 emphasis: {
                                     show: false,
@@ -700,10 +745,10 @@
 
                 for (var n = 0; n < data.length; n++) {
                     var res = [];
-                    for (j = 0; j < province.length; j++) {
+                    for (j = 0; j < state.length; j++) {
 
                         res.push({
-                            name: province[j],
+                            name: state[j],
                             value: data[n][j]            
                         });
                     }
@@ -732,7 +777,7 @@
                             },
                             {
                                 show: true,
-                                text: '治愈人数前十的省份',
+                                text: '治愈人数前十的州',
                                 textStyle: {
                                     color: '#2D3E53',
                                     fontSize: 18
@@ -794,12 +839,34 @@
     <script type="text/javascript">
     var Confirms=[];
     var date= [];
-    var province=['重庆','浙江','云南','新疆','香港','西藏','天津','台湾','四川','上海','陕西','山西','山东','青海','宁夏','内蒙古','辽宁','江西','江苏','吉林','湖南','湖北','黑龙江','河南','河北','海南','贵州','广西','广东','甘肃','福建','北京','澳门','安徽'];
+    var province=["阿拉斯加州","阿拉巴马州","阿肯色州","亚利桑那州","加利福尼亚州","科罗拉多州","康涅狄格州","特拉华州","佛罗里达州","乔治亚州（佐治亚州）","夏威夷州","爱荷华州（艾奥瓦州）（衣阿华州）","爱达荷州","伊利诺斯州","印第安纳州","堪萨斯州","肯塔基州","路易斯安那州","马萨诸塞州（麻省、麻州）","马里兰州","缅因州","密歇根州（密执安州）","明尼苏达州","密苏里州","密西西比州","蒙大拿州","北卡罗来纳州","北达科他州","内布拉斯加州","新罕布什尔州（新罕布夏州）","新泽西州","新墨西哥州","内华达州","纽约州","俄亥俄州","俄克拉荷马州","俄勒冈州","宾夕法尼亚州","罗得岛州（罗德岛州）","南卡罗来纳州  ","南达科他州","田纳西州","得克萨斯州","犹他州","弗吉尼亚州","佛蒙特州","华盛顿州","威斯康辛州（威斯康星州）","西弗吉尼亚州","怀俄明州"];
+    var state=["Alaska","Alabama","Arkansas","Arizona","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Iowa","Idaho","Illinois","Indiana","Kansas","Kentucky","Louisiana","Massachusetts","Maryland","Maine","Michigan","Minnesota","Missouri","Mississippi","Montana","North Carolina","North Dakota","Nebraska","New Hampshire Hampshire","New Jersey","New Mexico","Nevada","New York","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Virginia","Vermont","Washington","Wisconsin","West Virginia","Wyoming"];
         $.ajax({
             type:"GET",
-            url: "data/data_china2_date.csv",
+            url: "http://localhost:8081/COVID-19/USA/all",
+            dataType: "json", 
             success: function(results) {
-                //转变为字符串
+            	var k=1;
+            	date[k-1]=3.12;
+            	Confirms[k-1] = new Array();
+            	for(var j = 0; j < 50; j++) {
+                    Confirms[k-1][j] = 0; //0表示只有一个空的红圈
+               	}
+               	var l=0;
+            	$.each(results,function(i,n){
+            		if (n.date!=date[k-1]){
+            			date[k]=n.date;
+            			Confirms[k] = new Array();
+            			for(var j = 0; j < 50; j++) {
+                                Confirms[k][j] = 0; //0表示只有一个空的红圈
+               			}
+               			k++;
+            		}
+            		if(l==50) l=0;
+                    Confirms[k-1][l]=n.dead; 
+                    l++;
+            	});
+                /*//转变为字符串
                 var rs = new String(results);         
                 var n_date = 0;
                 rs=rs.split("\n");
@@ -828,7 +895,7 @@
                          Confirms[n_date]=Confirms[n_date].map(Number)
                     }                  
                     n_date++;
-                }
+                }*/
 
 
                 var days=date;
@@ -863,32 +930,32 @@
                         visualMap: {
                             type: 'piecewise',
                             pieces: [{
-                                    min: 101,
+                                    min: 5001,
                                     color: '#262626'
                                 },
                                 {
-                                    min: 51,
-                                    max: 100,
+                                    min: 2501,
+                                    max: 5000,
                                     color: '#616161'
                                 },
                                 {
-                                    min: 21,
-                                    max: 50,
+                                    min: 1001,
+                                    max: 2500,
                                     color: '#808080'
                                 },
                                 {
-                                    min: 11,
-                                    max: 20,
+                                    min: 501,
+                                    max: 1000,
                                     color: '#A9A9A9'
                                 },
                                 {
-                                    min: 6,
-                                    max: 10,
+                                    min: 251,
+                                    max: 500,
                                     color: '#D3D3D3'
                                 },
                                 {
                                     min: 1,
-                                    max: 5,
+                                    max: 250,
                                     color: '#F5F5F5'
                                 },
                                 {
@@ -916,7 +983,7 @@
                         },
                         xAxis: {
                             min: 0,
-                            max: 4000,
+                            max: 15000,
                             show: false
                         },
                         yAxis: [{
@@ -952,7 +1019,7 @@
                             },
                         }],
                         geo: {
-                            map: 'china',
+                            map: '美国',
                             right: '35%',
                             left: '5%',
                             label: {
@@ -969,7 +1036,7 @@
                         series: [{
                                 name: '累计死亡数',
                                 type: 'map',
-                                map: 'china',
+                                map: '美国',
                                 roam: false,
                                 geoIndex: 0,
                                 label: {
@@ -1000,10 +1067,10 @@
 
                 for (var n = 0; n < data.length; n++) {
                     var res = [];
-                    for (j = 0; j < province.length; j++) {
+                    for (j = 0; j < state.length; j++) {
 
                         res.push({
-                            name: province[j],
+                            name: state[j],
                             value: data[n][j]            
                         });
                     }
@@ -1032,7 +1099,7 @@
                             },
                             {
                                 show: true,
-                                text: '死亡人数前十的省份',
+                                text: '死亡人数前十的州',
                                 textStyle: {
                                     color: '#2D3E53',
                                     fontSize: 18
