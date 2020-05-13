@@ -21,6 +21,7 @@
     <script src="assets/js/jquery-3.4.1.js"></script>
     <script src="assets/js/echarts.min.js"></script>
     <script src="assets/js/china.js"></script>
+	<script src="assets/js/hubei.js"></script>
 
 </head>
 
@@ -95,7 +96,7 @@
 	<div id="page-wrapper">
 		  <div class="header"> 
             <h1 class="page-header">
-           全国疫情数据可视化
+           湖北疫情数据可视化
            </h1>
            <div class="divider" style=""></div>								
 		 </div>
@@ -174,7 +175,7 @@
 			   </div>
 				<!-- /. ROW  -->
 	<script type="text/javascript">
-		 $.get('https://lab.isaaclin.cn/nCoV/api/area?latest=1&province=中国', function (data) {
+		 $.get('https://lab.isaaclin.cn/nCoV/api/area?latest=1&province=%E6%B9%96%E5%8C%97%E7%9C%81', function (data) {
 	                var mydata = typeof data=='string'?JSON.parse(data):data;                
 	                var confirmedCount = mydata.results[0].confirmedCount;
 	                var currentConfirmedCount = mydata.results[0].currentConfirmedCount;      
@@ -191,10 +192,11 @@
     <script type="text/javascript">
 		var Confirms=[];
 		var date= [];
-		var province=['重庆','浙江','云南','新疆','香港','西藏','天津','台湾','四川','上海','陕西','山西','山东','青海','宁夏','内蒙古','辽宁','江西','江苏','吉林','湖南','湖北','黑龙江','河南','河北','海南','贵州','广西','广东','甘肃','福建','北京','澳门','安徽'];
+		var province=["鄂州","恩施州","黄冈","黄石","荆门","荆州","潜江","神农架","十堰","随州","天门","武汉","仙桃","咸宁","襄阳","孝感","宜昌"];
+
 		    $.ajax({
 		        type:"GET",
-		        url: "data/data_china2_date.csv",
+		        url: "data/data_hubei_date.csv",
 		        success: function(results) {
 		            //转变为字符串
 		            var rs = new String(results);         
@@ -205,20 +207,20 @@
 		            } 
 
 		            //数组初始化
-		            var L = parseInt((rs.length-1)/34);
+		            var L = parseInt((rs.length-1)/17);
 		            for(var i = 0; i < L; i++) {
 		                        date[i] = '';
 		                        Confirms[i] = new Array();
-		                        for(var j = 0; j < 34; j++) {
+		                        for(var j = 0; j < 17; j++) {
 		                            Confirms[i][j] = 0; //0表示只有一个空的红圈
 		                    }
 		                } 
 
 
 		            //获取值   
-		            for (var i = 1; i < rs.length-1; i+=34) {
+		            for (var i = 1; i < rs.length-1; i+=17) {
 		                date[n_date]=rs[i][1];
-		                for(var j = 0;j<34;j++){
+		                for(var j = 0;j<17;j++){
 		                     Confirms[n_date][j]=rs[i+j][2]; 
 		                }
 
@@ -351,7 +353,7 @@
 		                        },
 		                    }],
 		                    geo: {
-		                        map: 'china',
+		                        map: '湖北',
 		                        right: '35%',
 		                        left: '5%',
 		                        label: {
@@ -368,7 +370,7 @@
 		                    series: [{
 		                            name: '累计确诊数',
 		                            type: 'map',
-		                            map: 'china',
+		                            map: '湖北',
 		                            roam: false,
 		                            geoIndex: 0,
 		                            label: {
@@ -434,7 +436,7 @@
 		                        },
 		                        {
 		                            show: true,
-		                            text: '确诊人数前十的省份',
+		                            text: '确诊人数前十的市',
 		                            textStyle: {
 		                                color: '#2D3E53',
 		                                fontSize: 18
@@ -496,10 +498,10 @@
     <script type="text/javascript">
 		var Confirms=[];
 		var date= [];
-		var province=['重庆','浙江','云南','新疆','香港','西藏','天津','台湾','四川','上海','陕西','山西','山东','青海','宁夏','内蒙古','辽宁','江西','江苏','吉林','湖南','湖北','黑龙江','河南','河北','海南','贵州','广西','广东','甘肃','福建','北京','澳门','安徽'];
+		var province=["鄂州","恩施州","黄冈","黄石","荆门","荆州","潜江","神农架","十堰","随州","天门","武汉","仙桃","咸宁","襄阳","孝感","宜昌"];
 		    $.ajax({
-		        type:"GET",
-		        url: "data/data_china2_date.csv",
+		        type:"GET",		        		        
+		        url: "data/data_hubei_date.csv",
 		        success: function(results) {
 		            //转变为字符串
 		            var rs = new String(results);         
@@ -510,18 +512,18 @@
 		            } 
 
 		            //数组初始化
-		            var L = parseInt((rs.length-1)/34);
+		            var L = parseInt((rs.length-1)/17);
 		            for(var i = 0; i < L; i++) {
 		                        date[i] = '';
 		                        Confirms[i] = new Array();
-		                        for(var j = 0; j < 34; j++) {
+		                        for(var j = 0; j < 17; j++) {
 		                            Confirms[i][j] = 0; //0表示只有一个空的红圈
 		                    }
 		                } 
 		            //获取值   
-		            for (var i = 1; i < rs.length-1; i+=34) {
+		            for (var i = 1; i < rs.length-1; i+=17) {
 		                date[n_date]=rs[i][1];
-		                for(var j = 0;j<34;j++){
+		                for(var j = 0;j<17;j++){
 		                     Confirms[n_date][j]=rs[i+j][4]; 
 		                }
 
@@ -654,7 +656,7 @@
 		                        },
 		                    }],
 		                    geo: {
-		                        map: 'china',
+		                        map: '湖北',
 		                        right: '35%',
 		                        left: '5%',
 		                        label: {
@@ -671,7 +673,7 @@
 		                    series: [{
 		                            name: '累计治愈数',
 		                            type: 'map',
-		                            map: 'china',
+		                            map: '湖北',
 		                            roam: false,
 		                            geoIndex: 0,
 		                            label: {
@@ -734,7 +736,7 @@
 		                        },
 		                        {
 		                            show: true,
-		                            text: '治愈人数前十的省份',
+		                            text: '治愈人数前十的市',
 		                            textStyle: {
 		                                color: '#2D3E53',
 		                                fontSize: 18
@@ -796,10 +798,12 @@
     <script type="text/javascript">
 		var Confirms=[];
 		var date= [];
-		var province=['重庆','浙江','云南','新疆','香港','西藏','天津','台湾','四川','上海','陕西','山西','山东','青海','宁夏','内蒙古','辽宁','江西','江苏','吉林','湖南','湖北','黑龙江','河南','河北','海南','贵州','广西','广东','甘肃','福建','北京','澳门','安徽'];
+		var province=["鄂州","恩施州","黄冈","黄石","荆门","荆州","潜江","神农架","十堰","随州","天门","武汉","仙桃","咸宁","襄阳","孝感","宜昌"];
+
+
 		    $.ajax({
 		        type:"GET",
-		        url: "data/data_china2_date.csv",
+		        url: "data/data_hubei_date.csv",
 		        success: function(results) {
 		            //转变为字符串
 		            var rs = new String(results);         
@@ -810,18 +814,18 @@
 		            } 
 
 		            //数组初始化
-		            var L = parseInt((rs.length-1)/34);
+		            var L = parseInt((rs.length-1)/17);
 		            for(var i = 0; i < L; i++) {
 		                        date[i] = '';
 		                        Confirms[i] = new Array();
-		                        for(var j = 0; j < 34; j++) {
+		                        for(var j = 0; j < 17; j++) {
 		                            Confirms[i][j] = 0; //0表示只有一个空的红圈
 		                    }
 		                } 
 		            //获取值   
-		            for (var i = 1; i < rs.length-1; i+=34) {
+		            for (var i = 1; i < rs.length-1; i+=17) {
 		                date[n_date]=rs[i][1];
-		                for(var j = 0;j<34;j++){
+		                for(var j = 0;j<17;j++){
 		                     Confirms[n_date][j]=rs[i+j][3]; 
 		                }
 
@@ -954,7 +958,7 @@
 		                        },
 		                    }],
 		                    geo: {
-		                        map: 'china',
+		                        map: '湖北',
 		                        right: '35%',
 		                        left: '5%',
 		                        label: {
@@ -971,7 +975,7 @@
 		                    series: [{
 		                            name: '累计死亡数',
 		                            type: 'map',
-		                            map: 'china',
+		                            map: '湖北',
 		                            roam: false,
 		                            geoIndex: 0,
 		                            label: {
@@ -1034,7 +1038,7 @@
 		                        },
 		                        {
 		                            show: true,
-		                            text: '死亡人数前十的省份',
+		                            text: '死亡人数前十的市',
 		                            textStyle: {
 		                                color: '#2D3E53',
 		                                fontSize: 18
