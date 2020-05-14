@@ -114,132 +114,9 @@
       			<option>0510</option>
       </select>
  	</div>
-<div id="container" style="width:1200px;height: 650px;"></div>
-<script type="text/javascript">
-	var val = '0120';
-	drawGragh(val);
-	$("#select").change(function(){
-        val=$(this).val();
-        drawGragh(val);
-    });
-
-    function drawGragh(val){
-    	var dom = document.getElementById("container");
-	    var myChart = echarts.init(dom);
-	    var app = {};
-	    option = null;
-	    myChart.showLoading();
-	    $.get('data/gexf/' + val + '.gexf', function (xml) {
-	        myChart.hideLoading();
-
-	        var graph = echarts.dataTool.gexf.parse(xml);
-	        
-	        var n_class = 0;
-	        graph.nodes.forEach(function (node) {
-	            node.itemStyle = null;
-	            node.value = node.symbolSize;
-	            node.label = {
-	                normal: {
-	                    show: node.symbolSize > 15
-	                }
-	            };
-	            node.draggable = true;
-	            node.category = node.attributes.modularity_class;
-	            if(  node.category > n_class ) n_class = node.category;
-	        });
-
-	        var categories = [];
-	        for (var i = 0; i < n_class; i++) {
-	            categories[i] = {
-	                name: '社团' + (i+1)
-	            };
-	        }
-
-	        option = {
-	            tooltip: {
-				        show: true, // 默认显示
-				        showContent: true, // 是否显示提示框浮层
-				        trigger: 'item', // 触发类型，默认数据项触发
-				        triggerOn: 'mousemove', // 提示触发条件，mousemove鼠标移至触发，还有click点击触发
-				        alwaysShowContent: true, // 默认离开提示框区域隐藏，true为一直显示
-				        showDelay: 100, // 浮层显示的延迟，单位为 ms，默认没有延迟，也不建议设置。在 triggerOn 为 'mousemove' 时有效。
-				        hideDelay: 2000, // 浮层隐藏的延迟，单位为 ms，在 alwaysShowContent 为 true 的时候无效。
-				        enterable: false, // 鼠标是否可进入提示框浮层中，默认为false，如需详情内交互，如添加链接，按钮，可设置为 true。
-				        position: 'right', // 提示框浮层的位置，默认不设置时位置会跟随鼠标的位置。只在 trigger 为'item'的时候有效。
-				        confine: false, 
-				        transitionDuration: 0.2, // 提示框浮层的移动动画过渡时间，单位是秒，设置为 0 的时候会紧跟着鼠标移动。
-				    },
-	            legend: [{
-	                // selectedMode: 'single',
-	               
-	            }],
-	            animationDuration: 1500,
-	            animationEasingUpdate: 'quinticInOut',
-	            series : [
-	                {
-	                    name: '国家',
-	                    type: 'graph',
-	                    layout: 'none',
-	                    data: graph.nodes,
-	                    links: graph.links,
-	                    categories: categories,
-				        roam: true, 
-				        nodeScaleRatio: 0.6, // 鼠标漫游缩放时节点的相应缩放比例，当设为0时节点不随着鼠标的缩放而缩放
-				        focusNodeAdjacency: true, 
-				        edgeSymbol: ['none', 'none'], 
-				        edgeSymbolSize: 10,
-
-				        itemStyle: { // ========图形样式，有 normal 和 emphasis 两个状态。
-				            // normal 是图形在默认状态下的样式；
-				            // emphasis 是图形在高亮状态下的样式，比如在鼠标悬浮或者图例联动高亮时。
-				            normal: { // 默认样式
-				                label: {
-				                    show: true
-				                },
-				                borderType: 'dashed', // 图形描边类型，默认为实线，支持 'solid'（实线）, 'dashed'(虚线), 'dotted'（点线）。
-				                borderColor: 'rgba(205, 149, 12, 0.4)', // 设置图形边框为淡金色,透明度为0.4
-				                borderWidth: 2, // 图形的描边线宽。为 0 时无描边。
-				                opacity: 1 // 图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。默认0.5
-
-				            },
-				            emphasis: { // 高亮状态
-
-				            }
-				        },
-				        lineStyle: { // ========关系边的公用线条样式。
-				            normal: {
-				                //width: '1', //线的粗细
-				                type: 'solid', // 线的类型 'solid'（实线）'dashed'（虚线）'dotted'（点线）
-				                curveness: 0.3, // 线条的曲线程度，从0到1
-				                opacity: 0.5 // 图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。默认0.5
-				            },
-				            emphasis: { // 高亮状态
-				            }
-				        },
-				        label: { // ========结点图形上的文本标签
-				            normal: {
-				                show: true, // 是否显示标签。
-				                position: 'inside',
-				                textStyle: { // 标签的字体样式
-				                    color: '#d3d7d4', // 字体颜色 #cde6c7 #d1c7b7 #d9d6c3 #d3d7d4
-				                    fontStyle: 'normal', // 文字字体的风格 'normal'标准 'italic'斜体 'oblique' 倾斜
-				                    fontWeight: 'bolder', // 'normal'标准，'bold'粗的，'bolder'更粗的，'lighter'更细的，或100 | 200 | 300 | 400...
-				                    fontFamily: 'sans-serif', // 文字的字体系列
-				                    fontSize: 12, // 字体大小
-				                }
-				            },
-				            emphasis: { // 高亮状态
-				            }
-				        },
-
-	                }
-	            ]
-	        };
-	        myChart.setOption(option);
-	    }, 'xml');;
-    }
-    
-</script>
+		<div id="container" style="width:1200px;height: 650px;">
+		</div>
+  <label class="form-inline"style="margin-left: 15px;color: black;font-size: 18px;margin-left: 0px;">国家交互网络的时序变化分析</label> 
  <div class="row">                       
      <div class="col-md-6 col-sm-12 col-xs-12">                     
         <div class="card">
@@ -258,239 +135,141 @@
        </div>           
      </div>
   </div>
+	  <script type="text/javascript">
+				var date = '0120';
+				drawGragh(date);
+				$("#select").change(function(){
+			        val=$(this).val();
+			        drawGragh(val);
+			    });
+
+			    function drawGragh(date){
+			    	var dom = document.getElementById("container");
+				    var myChart = echarts.init(dom);
+				    var app = {};
+				    option = null;
+				    myChart.showLoading();
+				    $.get('data/gexf/' + date + '.gexf', function (xml) {
+				        myChart.hideLoading();
+
+				        var graph = echarts.dataTool.gexf.parse(xml);
+				        
+				        var n_class = 0;
+				        graph.nodes.forEach(function (node) {
+				            node.itemStyle = null;
+				            node.value = node.symbolSize;
+				            node.label = {
+				                normal: {
+				                    show: node.symbolSize > 15
+				                }
+				            };
+				            node.draggable = true;
+				            node.category = node.attributes.modularity_class;
+				            if(  node.category > n_class ) n_class = node.category;
+				        });
+
+				        var categories = [];
+				        for (var i = 0; i < n_class; i++) {
+				            categories[i] = {
+				                name: '社团' + (i+1)
+				            };
+				        }
+
+				        option = {
+				            tooltip: {
+							        show: true, // 默认显示
+							        showContent: true, // 是否显示提示框浮层
+							        trigger: 'item', // 触发类型，默认数据项触发
+							        triggerOn: 'mousemove', // 提示触发条件，mousemove鼠标移至触发，还有click点击触发
+							        alwaysShowContent: true, // 默认离开提示框区域隐藏，true为一直显示
+							        showDelay: 100, // 浮层显示的延迟，单位为 ms，默认没有延迟，也不建议设置。在 triggerOn 为 'mousemove' 时有效。
+							        hideDelay: 2000, // 浮层隐藏的延迟，单位为 ms，在 alwaysShowContent 为 true 的时候无效。
+							        enterable: false, // 鼠标是否可进入提示框浮层中，默认为false，如需详情内交互，如添加链接，按钮，可设置为 true。
+							        position: 'right', // 提示框浮层的位置，默认不设置时位置会跟随鼠标的位置。只在 trigger 为'item'的时候有效。
+							        confine: false, 
+							        transitionDuration: 0.2, // 提示框浮层的移动动画过渡时间，单位是秒，设置为 0 的时候会紧跟着鼠标移动。
+							    },
+				            legend: [{
+				                // selectedMode: 'single',
+				               
+				            }],
+				            animationDuration: 1500,
+				            animationEasingUpdate: 'quinticInOut',
+				            series : [
+				                {
+				                    name: '国家',
+				                    type: 'graph',
+				                    layout: 'none',
+				                    data: graph.nodes,
+				                    links: graph.links,
+				                    categories: categories,
+							        roam: true, 
+							        nodeScaleRatio: 0.6, // 鼠标漫游缩放时节点的相应缩放比例，当设为0时节点不随着鼠标的缩放而缩放
+							        focusNodeAdjacency: true, 
+							        edgeSymbol: ['none', 'none'], 
+							        edgeSymbolSize: 10,
+
+							        itemStyle: { // ========图形样式，有 normal 和 emphasis 两个状态。
+							            // normal 是图形在默认状态下的样式；
+							            // emphasis 是图形在高亮状态下的样式，比如在鼠标悬浮或者图例联动高亮时。
+							            normal: { // 默认样式
+							                label: {
+							                    show: true
+							                },
+							                borderType: 'dashed', // 图形描边类型，默认为实线，支持 'solid'（实线）, 'dashed'(虚线), 'dotted'（点线）。
+							                borderColor: 'rgba(205, 149, 12, 0.4)', // 设置图形边框为淡金色,透明度为0.4
+							                borderWidth: 2, // 图形的描边线宽。为 0 时无描边。
+							                opacity: 1 // 图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。默认0.5
+
+							            },
+							            emphasis: { // 高亮状态
+
+							            }
+							        },
+							        lineStyle: { // ========关系边的公用线条样式。
+							            normal: {
+							                //width: '1', //线的粗细
+							                type: 'solid', // 线的类型 'solid'（实线）'dashed'（虚线）'dotted'（点线）
+							                curveness: 0.3, // 线条的曲线程度，从0到1
+							                opacity: 0.5 // 图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。默认0.5
+							            },
+							            emphasis: { // 高亮状态
+							            }
+							        },
+							        label: { // ========结点图形上的文本标签
+							            normal: {
+							                show: true, // 是否显示标签。
+							                position: 'inside',
+							                textStyle: { // 标签的字体样式
+							                    color: '#d3d7d4', // 字体颜色 #cde6c7 #d1c7b7 #d9d6c3 #d3d7d4
+							                    fontStyle: 'normal', // 文字字体的风格 'normal'标准 'italic'斜体 'oblique' 倾斜
+							                    fontWeight: 'bolder', // 'normal'标准，'bold'粗的，'bolder'更粗的，'lighter'更细的，或100 | 200 | 300 | 400...
+							                    fontFamily: 'sans-serif', // 文字的字体系列
+							                    fontSize: 12, // 字体大小
+							                }
+							            },
+							            emphasis: { // 高亮状态
+							            }
+							        },
+
+				                }
+				            ]
+				        };
+				        myChart.setOption(option);
+				    }, 'xml');;
+			    }    
+	 </script>
 
      <script type="text/javascript">  
         var val = '湖北';
-        DrawEcharts1(val);
-        DrawEcharts2(val);
         DrawEcharts3(val);
         DrawEcharts4(val);
         $("#select").change(function(){
         val=$(this).val();
-        DrawEcharts1(val);
-        DrawEcharts2(val);
         DrawEcharts3(val);
         DrawEcharts4(val);
     });
-        // 指定图表的配置项和数据
-        function DrawEcharts1(val){
-        	var myChart = echarts.init(document.getElementById('echarts1'));
-	        myChart.showLoading();
-	            $.get('https://api.inews.qq.com/newsqa/v1/query/pubished/daily/list?province=' + val, function (data) {
-	                myChart.hideLoading();
-	                var province = typeof data=='string'?JSON.parse(data):data;
-                  console.log(province);
-	                var dates = province.data.map(function(m_data){
-	                    return m_data.date;
-	                })
-	                var confirms = province.data.map(function(m_data){
-	                    return m_data.confirm;
-	                })
-	                var confirms_add = province.data.map(function(m_data){
-	                    return m_data.newConfirm;
-	                })
-	                    option = {
-	                        tooltip: {
-	                            trigger: 'axis',
-	                            axisPointer: {
-	                                type: 'shadow',
-	                                label: {
-	                                    show: true
-	                                }
-	                            }
-	                        },
-	                        toolbox: {
-	                            show: true,
-	                            feature: {
-	                                restore: {show: true},
-	                                saveAsImage: {show: true}
-	                            },
-	                            right:'4%'
-	                        },
-	                        calculable: true,
-	                        legend: {
-	                            data: ['累计确诊数', '新增确诊数'],
-	                            itemGap: 5
-	                        },
-	                        grid: {
-	                            top: '12%',
-	                            left: '1%',
-	                            right: '10%',
-	                            containLabel: true
-	                        },
-	                        xAxis: [
-	                            {
-	                                type: 'category',
-	                                data: dates
-	                            }
-	                        ],
-	                        yAxis: [
-	                            {
-	                                type: 'value',
-	                                name: '人数',
-	                            },
-	                            {
-	                                type: 'value',
-	                                name: '人数',
-	                            }
-	                        ],
-
-	                        dataZoom: [
-	                            {
-	                                show: true,
-	                                start: 0,
-	                                end: 100
-	                            },
-	                            {
-	                                type: 'inside',
-	                                start: 50,
-	                                end: 100
-	                            },
-	                            /*{
-	                                show: true,
-	                                yAxisIndex: 0,
-	                                filterMode: 'empty',
-	                                width: 30,
-	                                height: '80%',
-	                                showDataShadow: false,
-	                                left: '93%'
-	                            }*/
-	                        ],
-	                        series: [
-	                            {
-	                                name: '累计确诊数',
-	                                type: 'line',
-	                                data: confirms,
-	                            },
-	                            {
-	                                name: '新增确诊数',
-	                                type: 'bar',
-	                                yAxisIndex:1,
-	                                data: confirms_add,
-	                                itemStyle:{
-	                                    normal:{
-	                                        color:'#FF8C00'
-	                                    }
-	                                }
-	                            }
-	                        ]
-	                    };
-
-	                   myChart.setOption(option);
-	            });
-      }
-       function DrawEcharts2(val){
-        // 基于准备好的dom，初始化echarts实例
-	        var myChart2 = echarts.init(document.getElementById('echarts2'));
-	        // 指定图表的配置项和数据
-	        myChart2.showLoading();
-	            $.get('https://api.inews.qq.com/newsqa/v1/query/pubished/daily/list?province='+ val, function (data) {
-	                myChart2.hideLoading();
-	                var province = typeof data=='string'?JSON.parse(data):data;
-	                var dates = province.data.map(function(m_data){
-	                    return m_data.date;
-	                })
-	                var Heals = province.data.map(function(m_data){
-	                    return m_data.heal;
-	                })
-	                var Heals_add = province.data.map(function(m_data){
-	                    return m_data.newHeal;
-	                })
-	                    option = {
-	                        tooltip: {
-	                            trigger: 'axis',
-	                            axisPointer: {
-	                                type: 'shadow',
-	                                label: {
-	                                    show: true
-	                                }
-	                            }
-	                        },
-	                        toolbox: {
-	                            show: true,
-	                            feature: {
-	                                restore: {show: true},
-	                                saveAsImage: {show: true}
-	                            },
-	                            right:'4%'
-	                        },
-	                        calculable: true,
-	                        legend: {
-	                            data: ['累计治愈数', '新增治愈数'],
-	                            itemGap: 5
-	                        },
-	                        grid: {
-	                            top: '12%',
-	                            left: '1%',
-	                            right: '10%',
-	                            containLabel: true
-	                        },
-	                        xAxis: [
-	                            {
-	                                type: 'category',
-	                                data: dates
-	                            }
-	                        ],
-	                        yAxis: [
-	                            {
-	                                type: 'value',
-	                                name: '人数',
-	                            },
-	                            {
-	                                type: 'value',
-	                                name: '人数',
-	                            }
-	                        ],
-
-	                        dataZoom: [
-	                            {
-	                                show: true,
-	                                start: 0,
-	                                end: 100
-	                            },
-	                            {
-	                                type: 'inside',
-	                                start: 50,
-	                                end: 100
-	                            },
-	                            /*{
-	                                show: true,
-	                                yAxisIndex: 0,
-	                                filterMode: 'empty',
-	                                width: 30,
-	                                height: '80%',
-	                                showDataShadow: false,
-	                                left: '93%'
-	                            }*/
-	                        ],
-	                        series: [
-	                            {
-	                                name: '累计治愈数',
-	                                type: 'line',
-	                                data: Heals,
-	                                itemStyle:{
-	                                    normal:{
-	                                        color:'#66CD00'
-	                                    }
-	                                }
-	                            },
-	                            {
-	                                name: '新增治愈数',
-	                                type: 'bar',
-	                                yAxisIndex:1,
-	                                data: Heals_add,
-	                                itemStyle:{
-	                                    normal:{
-	                                        color:'#54FF9F'
-	                                    }
-	                                }
-	                            }
-	                        ]
-	                    };
-
-	                   myChart2.setOption(option);
-	            });
-     }
+       
       function DrawEcharts3(val){
         // 基于准备好的dom，初始化echarts实例
 	        var n_days = ['1.20','1.30','2.10','2.20','2.29','3.10','3.20','3.30','4.10','4.20','4.30','5.10',]
