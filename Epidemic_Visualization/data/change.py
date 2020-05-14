@@ -1,16 +1,16 @@
 '''
 获取文件信息
 '''
-fi = open("changedata.txt",encoding='UTF-8')
+fi = open("usa.txt",encoding='UTF-8')
 lines = fi.readlines()
-txt = open("dataout.txt",mode='w',encoding='UTF-8')
+txt = open("usaout.txt",mode='w',encoding='UTF-8')
 # 读取身高大于170cm
 data = []
 # lines =lines.split("\n");
 for line in lines:
     line=line.strip('\n')  #去掉换行符
-    txt.write('\''+line+'\',')
-    line = "'"+line+"',"     
+    txt.write('{name:' + line + ', value: 1},' + '\n')
+    # line = "'"+line+"',"     
     
 print("data{}".format(line))
 

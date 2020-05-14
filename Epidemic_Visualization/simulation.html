@@ -61,12 +61,12 @@
                     </li>
                     <li>
                         <a href="#" class="waves-effect waves-dark" style="font-size: 18px;margin-top: 6px;margin-bottom: 6px"><i class="fa fa-bar-chart-o"></i>趋势分析<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level collapse in">
+                        <ul class="nav nav-second-level">
                             <li>
                                 <a href="chart.html" class="waves-effect waves-dark"style="font-size: 18px;margin-top: 6px;margin-bottom: 6px"><i class="fa fa-bar-chart-o"></i>中国各省</a>
                             </li>
                             <li>
-                                <a href="hubei.html" class="active-menu waves-effect waves-dark"style="font-size: 18px;margin-top: 6px;margin-bottom: 6px"><i class="fa fa-bar-chart-o"></i>湖北各市</a>
+                                <a href="hubei.html" class="waves-effect waves-dark"style="font-size: 18px;margin-top: 6px;margin-bottom: 6px"><i class="fa fa-bar-chart-o"></i>湖北各市</a>
                             </li>
                             <li>
                                 <a href="countries_chart.html" class="waves-effect waves-dark"style="font-size: 18px;margin-top: 6px;margin-bottom: 6px"><i class="fa fa-bar-chart-o"></i>世界各国</a>
@@ -107,7 +107,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="simulation.html" class="waves-effect waves-dark" style="font-size: 18px;margin-top: 6px;margin-bottom: 6px"><i class="fa fa-fw fa-file"></i>疫情模拟预测</a>
+                        <a href="simulation.html" class="active-menu waves-effect waves-dark" style="font-size: 18px;margin-top: 6px;margin-bottom: 6px"><i class="fa fa-fw fa-file"></i>疫情模拟预测</a>
                     </li>
                         </ul>
                     </li>
@@ -120,35 +120,20 @@
 <div id="page-wrapper">
     <div class="header"> 
         <h1 class="page-header">
-           湖北疫情数据可视化
+           SEIR模型疫情模拟与预测
        </h1>
        <div class="divider" style=""></div>
       <!--  <ol class="breadcrumb">
       </ol> -->
 </div>
  <div id="page-inner"> 
-    <div class="form-inline row" >
-      <label class="form-inline"style="margin-left: 15px;color: black">请选择您想要查询的城市</label>  
-      <select class="form-control" id="select" style="width: 120px;margin-left: 15px">
-                <option>武汉</option>
-                <option>荆州</option>
-                <option>黄冈</option>
-                <option>咸宁</option>
-                <option>随州</option>
-                <option>黄石</option>
-                <option>十堰</option>
-                <option>宜昌</option>
-                <option>襄阳</option>
-                <option>鄂州</option>
-                <option>荆门</option>
-                <option>孝感</option>
-                <option>恩施州</option>
-      </select>
-    </div>
+   
   <div class="row">                       
      <div class="col-md-6 col-sm-12 col-xs-12">                     
         <div class="card">
-          <div class="card-header"></div>
+          <div class="card-header" style="font-size:22px; padding-top:20px;text-align:center; margin: 0 auto">
+		       <strong>传统SEIR模型</strong>
+		  </div>
             <div class="card-body">
                <div id="echarts1" style="width: 600px;height:450px;padding-top:20px;;margin: 0 auto"></div>
             </div> 
@@ -156,7 +141,9 @@
      </div>
      <div class="col-md-6 col-sm-12 col-xs-12">                     
         <div class="card">
-          <div class="card-header"></div>
+          <div class="card-header" style="font-size:22px; padding-top:20px;text-align:center; margin: 0 auto">
+				<strong>模拟现实疫情改进SEIR模型</strong>
+		  </div>
             <div class="card-body" style="align-self: center;">
                <div id="echarts2" style="width: 600px;height:450px;padding-top:20px;margin: 0 auto"></div>
             </div> 
@@ -167,7 +154,9 @@
  <div class="row">                       
      <div class="col-md-6 col-sm-12 col-xs-12">                     
         <div class="card">
-          <div class="card-header"></div>
+          <div class="card-header" style="font-size:22px; padding-top:20px;text-align:center; margin: 0 auto">
+			<strong>湖北疫情模拟</strong>
+		  </div>
             <div class="card-body">
                <div id="echarts3" style="width: 600px;height:450px;padding-top:20px;;margin: 0 auto"></div>
             </div> 
@@ -175,7 +164,9 @@
      </div>
      <div class="col-md-6 col-sm-12 col-xs-12">                     
         <div class="card">
-          <div class="card-header"></div>
+          <div class="card-header" style="font-size:22px; padding-top:20px;text-align:center; margin: 0 auto">
+			 <strong>中国疫情模拟</strong>
+		  </div>
             <div class="card-body" style="align-self: center;">
                <div id="echarts4" style="width: 600px;height:450px;padding-top:20px;margin: 0 auto"></div>
             </div> 
@@ -185,34 +176,79 @@
 
      <script type="text/javascript">  
         var val = '武汉';
-        DrawEcharts1(val);
-        DrawEcharts2(val);
-        DrawEcharts3(val);
-        DrawEcharts4(val);
-        $("#select").change(function(){
-        val=$(this).val();
-        DrawEcharts1(val);
-        DrawEcharts2(val);
-        DrawEcharts3(val);
-        DrawEcharts4(val);
-    });
+        DrawEcharts1();
+        DrawEcharts2();
+        DrawEcharts3();
+        DrawEcharts4();
+        <!-- $("#select").change(function(){ -->
+        <!-- val=$(this).val(); -->
+        <!-- DrawEcharts1(val); -->
+        <!-- DrawEcharts2(val); -->
+        <!-- DrawEcharts3(val); -->
+        <!-- DrawEcharts4(val); -->
+    <!-- }); -->
         // 指定图表的配置项和数据
-        function DrawEcharts1(val){
-            var myChart = echarts.init(document.getElementById('echarts1'));
-            myChart.showLoading();
-                $.get('https://api.inews.qq.com/newsqa/v1/query/pubished/daily/list?province=湖北&city=' + val, function (data) {
-                    myChart.hideLoading();
-                    var city = typeof data=='string'?JSON.parse(data):data;
-                    var dates = city.data.map(function(m_data){
-                        return m_data.date;
-                    })
-                    var confirms = city.data.map(function(m_data){
-                        return m_data.confirm;
-                    })
-                    var confirms_add = city.data.map(function(m_data){
-                        return m_data.confirm_add;
-                    })
-                        option = {
+		/*湖北和中国预测图*/
+		
+			
+		
+			
+		/*myseir模型图*/
+		
+		
+			
+     
+     function DrawEcharts1(){
+        // 基于准备好的dom，初始化echarts实例
+		/*传统seir模型图*/
+		var sus = [];
+		var exp = [];
+		var inf = [];
+		var rec = [];
+		var day3 = [];
+		$.ajax({
+		        type:"GET",
+		        url: "data/seir.csv",
+		        success: function(results) {
+		            //转变为字符串
+		            var rs = new String(results);         
+		            var n_date = 0;
+		            rs=rs.split("\n");
+		            for (var i = 0; i < rs.length; i++) {
+		                rs[i] = rs[i].split(",");						
+		            } 
+					for(var i = 0; i < rs.length; i++) {//初始化？
+		                    day3[i] = '';		                        		                 		                    
+							sus[i] = 1500;
+							exp[i] = 0;
+							inf[i] = 0;
+							rec[i] = 0;		                    							
+		                } 
+									
+					for (var i = 1; i < rs.length; i++) {
+		                
+						sus[i] = rs[i][0];
+						exp[i] = rs[i][1];
+						inf[i] = rs[i][2];
+						rec[i] = rs[i][3];
+							
+		            } 
+					for (var i = rs.length-1; i < rs.length; i++) {
+		                
+						sus[i] = rs[i-1][0];
+						exp[i] = rs[i-1][1];
+						inf[i] = rs[i-1][2];
+						rec[i] = rs[i-1][3];
+					}   
+					//console.log(rs.length);
+					
+					
+					for(var i = 0; i < rs.length ; i++) {
+						day3[i] = i + 1 ;
+					}
+					//console.log(day3);
+					var myChart1 = echarts.init(document.getElementById('echarts1'));
+					var option = {
                             tooltip: {
                                 trigger: 'axis',
                                 axisPointer: {
@@ -232,7 +268,7 @@
                             },
                             calculable: true,
                             legend: {
-                                data: ['累计确诊数', '新增确诊数'],
+                                data: ['易感者', '潜伏者','感染者','康复者'],
                                 itemGap: 5
                             },
                             grid: {
@@ -244,18 +280,354 @@
                             xAxis: [
                                 {
                                     type: 'category',
-                                    data: dates
+									
+                                    data: day3
                                 }
                             ],
                             yAxis: [
                                 {
                                     type: 'value',
                                     name: '人数',
+                                }
+                                
+                            ],
+
+                            dataZoom: [
+                                {
+                                    show: true,
+                                    start: 0,
+                                    end: 100
                                 },
                                 {
-                                    type: 'value',
-                                    name: '人数',
+                                    type: 'inside',
+                                    start: 50,
+                                    end: 100
+                                },
+                                /*{
+                                    show: true,
+                                    yAxisIndex: 0,
+                                    filterMode: 'empty',
+                                    width: 30,
+                                    height: '80%',
+                                    showDataShadow: false,
+                                    left: '93%'
+                                }*/
+                            ],
+                            series: [
+                                
+								{
+                                    name: '易感者',
+                                    type: 'line',
+                                    data: sus,
+                                    itemStyle:{
+                                        normal:{
+                                            color:'#B0C4DE'
+                                        }
+                                    }
+                                },
+								{
+                                    name: '潜伏者',
+                                    type: 'line',
+                                    data: exp,
+                                    itemStyle:{
+                                        normal:{
+                                            color:'	#FFD700'
+                                        }
+                                    }
+                                },
+								{
+                                    name: '感染者',
+                                    type: 'line',
+                                    data: inf,
+                                    itemStyle:{
+                                        normal:{
+                                            color:'#FF0000'
+                                        }
+                                    }
+                                },
+								{
+                                    name: '康复者',
+                                    type: 'line',
+                                    data: rec,
+                                    itemStyle:{
+                                        normal:{
+                                            color:'#90EE90'
+                                        }
+                                    }
+                                },
+                            ]
+                        };
+                       myChart1.setOption(option);
+				}	
+			});
+                        
+        }
+      function DrawEcharts2(){
+        
+			var m_tot = [];
+			var m_sus = [];
+			var m_exp = [];
+			var m_inf = [];
+			var m_rec = [];
+			var day2 = [];
+			$.ajax({
+					type:"GET",
+					url: "data/myseir.csv",
+					success: function(results) {
+						//转变为字符串
+						var rs = new String(results);         
+						var n_date = 0;
+						rs=rs.split("\n");
+						for (var i = 0; i < rs.length; i++) {
+							rs[i] = rs[i].split(",");						
+						} 
+						for(var i = 0; i < rs.length; i++) {//初始化？
+								day2[i] = '';		                        		                 
+								m_tot[i] = "1500";
+								m_sus[i] = "1500";
+								m_exp[i] = "0";
+								m_inf[i] = "0";
+								m_rec[i] = "0";		                    							
+							} 
+										
+						for (var i = 1; i < rs.length; i++) {
+							m_tot[i] = rs[i][0];
+							m_sus[i] = rs[i][1];
+							m_exp[i] = rs[i][2];
+							m_inf[i] = rs[i][3];
+							m_rec[i] = rs[i][4];
+								
+						} 
+						for (var i = rs.length-1; i < rs.length; i++) {
+							m_tot[i] = rs[i-1][0];
+							m_sus[i] = rs[i-1][1];
+							m_exp[i] = rs[i-1][2];
+							m_inf[i] = rs[i-1][3];
+							m_rec[i] = rs[i-1][4];
+						}   
+						console.log(m_tot);
+						
+						
+						for(var i = 0; i < rs.length ; i++) {
+							day2[i] = i + 1 ;
+						}
+						console.log(day2);
+						
+						var myChart2 = echarts.init(document.getElementById('echarts2'));
+						var option = {
+							tooltip: {
+								trigger: 'axis',
+								axisPointer: {
+									type: 'shadow',
+									label: {
+										show: true
+									}
+								}
+							},
+							toolbox: {
+								show: true,
+								feature: {
+									restore: {show: true},
+									saveAsImage: {show: true}
+								},
+								right:'4%'
+							},
+							calculable: true,
+							legend: {
+								data: ['总人数','易感者','潜伏者','感染者','康复者'],
+								itemGap: 5
+							},
+							grid: {
+								top: '12%',
+								left: '1%',
+								right: '10%',
+								containLabel: true
+							},
+							xAxis: [
+								{
+									type: 'category',
+									
+									data: day2
+								}
+							],
+							yAxis: [
+								{
+									type: 'value',
+									name: '人数',
+								},
+							],
+
+							dataZoom: [
+								{
+									show: true,
+									start: 0,
+									end: 100
+								},
+								{
+									type: 'inside',
+									start: 50,
+									end: 100
+								},
+							],
+							series: [
+								{
+									name: '总人数',
+									type: 'line',
+									data: m_tot,
+									itemStyle:{
+										normal:{
+											color:'#0000CD'
+										}
+									}
+								},
+								{
+									name: '易感者',
+									type: 'line',
+									data: m_sus,
+									itemStyle:{
+										normal:{
+											color:'#B0C4DE'
+										}
+									}
+								},
+								{
+									name: '潜伏者',
+									type: 'line',
+									data: m_exp,
+									itemStyle:{
+										normal:{
+											color:'	#FFD700'
+										}
+									}
+								},
+								{
+									name: '感染者',
+									type: 'line',
+									data: m_inf,
+									itemStyle:{
+										normal:{
+											color:'#FF0000'
+										}
+									}
+								},
+								{
+									name: '康复者',
+									type: 'line',
+									data: m_rec,
+									itemStyle:{
+										normal:{
+											color:'#90EE90'
+										}
+									}
+								}
+							]
+						};
+
+					   myChart2.setOption(option);
+						
+						
+						
+						
+					}	
+				});
+
+            
+            
+     }
+	    function DrawEcharts3(){
+			var seir_ch = [];
+			var seir_hb = [];
+			var real_ch = [];
+			var real_hb = [];
+			var day = [];
+			$.ajax({
+					type:"GET",
+					url: "data/compare.csv",
+					success: function(results) {
+						//转变为字符串
+						var rs = new String(results);         
+						var n_date = 0;
+						rs=rs.split("\n");
+						for (var i = 0; i < rs.length; i++) {
+							rs[i] = rs[i].split(",");						
+						} 
+						for(var i = 0; i < rs.length; i++) {//初始化？
+								day[i] = '';
+									
+								seir_ch[i] = 0; //0表示只有一个空的红圈
+								real_hb[i] = 0;
+								seir_hb[i] = 0;
+								real_ch[i] = 0;
+								
+							} 
+															
+						for (var i = 1; i < rs.length; i++) {
+							real_hb[i] = rs[i][0];
+							seir_hb[i] = rs[i][3];
+							real_ch[i] = rs[i][1];
+							seir_ch[i] = rs[i][5];
+						} 
+						for (var i = rs.length-1; i < rs.length; i++) {
+							real_hb[i] = rs[i-1][0];
+							seir_hb[i] = rs[i-1][3];
+							real_ch[i] = rs[i-1][1];
+							seir_ch[i] = rs[i-1][5];
+						} 
+						//console.log(rs.length);
+						//console.log(seir_hb);
+						//console.log(seir_ch);
+						for(var i = 0; i < rs.length ; i++) {
+							day[i] = i + 1 ;
+						}
+						//console.log(day);
+						var myChart3 = echarts.init(document.getElementById('echarts3'));
+						var option = {
+                            tooltip: {
+                                trigger: 'axis',
+                                axisPointer: {
+                                    type: 'shadow',
+                                    label: {
+                                        show: true
+                                    }
                                 }
+                            },
+							/*title: {
+							    left:'center',
+								bottom: '93%',
+								text: '湖北疫情模拟'
+							},*/
+                            toolbox: {
+                                show: true,
+                                feature: {
+                                    restore: {show: true},
+                                    saveAsImage: {show: true}
+                                },
+                                right:'4%'
+                            },
+                            calculable: true,
+                            legend: {
+							    
+                                data: ['实际', '模拟'],
+                                itemGap: 5
+                            },
+                            grid: {
+                                top: '12%',
+                                left: '1%',
+                                right: '10%',
+                                containLabel: true
+                            },
+                            xAxis: [
+                                {
+                                    type: 'category',
+                                    data: day,
+                                }
+                            ],
+                            yAxis: [
+                                {
+                                    type: 'value',
+                                    name: '患病人数',
+                                },
+                                
                             ],
 
                             dataZoom: [
@@ -281,11 +653,16 @@
                             ],
                             series: [
                                 {
-                                    name: '累计确诊数',
+                                    name: '模拟',
                                     type: 'line',
-                                    data: confirms,
+                                    data: seir_hb,
                                 },
-                                {
+								{
+                                    name: '实际',
+                                    type: 'line',
+                                    data: real_hb,
+                                }
+                                /*{
                                     name: '新增确诊数',
                                     type: 'bar',
                                     yAxisIndex:1,
@@ -295,28 +672,62 @@
                                             color:'#FF8C00'
                                         }
                                     }
-                                }
+                                }*/
                             ]
                         };
 
-                       myChart.setOption(option);
-                });
+                       myChart3.setOption(option);
+						
+					}	
+				});
+		
+                       
       }
-       function DrawEcharts2(val){
+       function DrawEcharts4(val){
         // 基于准备好的dom，初始化echarts实例
-            var myChart2 = echarts.init(document.getElementById('echarts2'));
-            // 指定图表的配置项和数据
-            myChart2.showLoading();
-                $.get('https://api.inews.qq.com/newsqa/v1/query/pubished/daily/list?province=湖北&city=' + val, function (data) {
-                    myChart2.hideLoading();
-                    var province = typeof data=='string'?JSON.parse(data):data;
-                    var dates = province.data.map(function(m_data){
-                        return m_data.date;
-                    })
-                    var Heals = province.data.map(function(m_data){
-                        return m_data.heal;
-                    })
-                        option = {
+			var seir_ch = [];
+			
+			var real_ch = [];
+			
+			var day = [];
+			$.ajax({
+					type:"GET",
+					url: "data/compare.csv",
+					success: function(results) {
+						//转变为字符串
+						var rs = new String(results);         
+						var n_date = 0;
+						rs=rs.split("\n");
+						for (var i = 0; i < rs.length; i++) {
+							rs[i] = rs[i].split(",");						
+						} 
+						for(var i = 0; i < rs.length; i++) {//初始化？
+								day[i] = '';
+									
+								seir_ch[i] = 0; //0表示只有一个空的红圈
+								
+								real_ch[i] = 0;
+								
+							} 
+															
+						for (var i = 1; i < rs.length; i++) {
+							
+							real_ch[i] = rs[i][1];
+							seir_ch[i] = rs[i][5];
+						} 
+						for (var i = rs.length-1; i < rs.length; i++) {
+							
+							real_ch[i] = rs[i-1][1];
+							seir_ch[i] = rs[i-1][5];
+						} 
+						//console.log(rs.length);
+						//console.log(seir_hb);
+						//console.log(seir_ch);
+						for(var i = 0; i < rs.length ; i++) {
+							day[i] = i + 1 ;
+						}
+						var myChart4 = echarts.init(document.getElementById('echarts4'));
+						var option = {
                             tooltip: {
                                 trigger: 'axis',
                                 axisPointer: {
@@ -326,6 +737,11 @@
                                     }
                                 }
                             },
+							/*title: {
+							    left:'center',
+								bottom: '95%',
+								text: '中国疫情模拟'
+							},*/
                             toolbox: {
                                 show: true,
                                 feature: {
@@ -336,7 +752,8 @@
                             },
                             calculable: true,
                             legend: {
-                                data: ['累计治愈数'],
+							    
+                                data: ['实际','模拟'],
                                 itemGap: 5
                             },
                             grid: {
@@ -348,13 +765,13 @@
                             xAxis: [
                                 {
                                     type: 'category',
-                                    data: dates
+                                    data: day
                                 }
                             ],
                             yAxis: [
                                 {
                                     type: 'value',
-                                    name: '人数',
+                                    name: '患病人数',
                                 },
                             ],
 
@@ -381,217 +798,37 @@
                             ],
                             series: [
                                 {
-                                    name: '累计治愈数',
+                                    name: '实际',
                                     type: 'line',
-                                    data: Heals,
+                                    data: real_ch,
                                     itemStyle:{
                                         normal:{
                                             color:'#66CD00'
                                         }
                                     }
                                 },
-                            ]
-                        };
-
-                       myChart2.setOption(option);
-                });
-     }
-     
-      function DrawEcharts3(val){
-        // 基于准备好的dom，初始化echarts实例
-            var myChart3 = echarts.init(document.getElementById('echarts3'));
-            // 指定图表的配置项和数据
-            myChart3.showLoading();
-                $.get('https://api.inews.qq.com/newsqa/v1/query/pubished/daily/list?province=湖北&city=' + val, function (data) {
-                    myChart3.hideLoading();
-                    var province = typeof data=='string'?JSON.parse(data):data;
-                    var dates = province.data.map(function(m_data){
-                        return m_data.date;
-                    })
-                    var deads = province.data.map(function(m_data){
-                        return m_data.dead;
-                    })
-                        option = {
-                            tooltip: {
-                                trigger: 'axis',
-                                axisPointer: {
-                                    type: 'shadow',
-                                    label: {
-                                        show: true
-                                    }
-                                }
-                            },
-                            toolbox: {
-                                show: true,
-                                feature: {
-                                    restore: {show: true},
-                                    saveAsImage: {show: true}
-                                },
-                                right:'4%'
-                            },
-                            calculable: true,
-                            legend: {
-                                data: ['累计死亡数'],
-                                itemGap: 5
-                            },
-                            grid: {
-                                top: '12%',
-                                left: '1%',
-                                right: '10%',
-                                containLabel: true
-                            },
-                            xAxis: [
-                                {
-                                    type: 'category',
-                                    data: dates
-                                }
-                            ],
-                            yAxis: [
-                                {
-                                    type: 'value',
-                                    name: '人数',
-                                },
-                            ],
-
-                            dataZoom: [
-                                {
-                                    show: true,
-                                    start: 0,
-                                    end: 100
-                                },
-                                {
-                                    type: 'inside',
-                                    start: 50,
-                                    end: 100
-                                },
-                            ],
-                            series: [
-                                {
-                                    name: '累计死亡数',
+								{
+                                    name: '模拟',
                                     type: 'line',
-                                    data: deads,
-                                    itemStyle:{
-                                        normal:{
-                                            color:'#303030'
-                                        }
-                                    }
-                                },
-                            ]
-                        };
-
-                       myChart3.setOption(option);
-                });
-     }
-     function DrawEcharts4(val){
-        // 基于准备好的dom，初始化echarts实例
-            var myChart4 = echarts.init(document.getElementById('echarts4'));
-            // 指定图表的配置项和数据
-            myChart4.showLoading();
-                $.get('https://api.inews.qq.com/newsqa/v1/query/pubished/daily/list?province=湖北&city=' + val, function (data) {
-                    myChart4.hideLoading();
-                    var province = typeof data=='string'?JSON.parse(data):data;
-                    var dates = province.data.map(function(m_data){
-                        return m_data.date;
-                    })
-                    var Heal_rate = province.data.map(function(m_data){
-                        return (m_data.heal/m_data.confirm).toFixed(4);;
-                    })
-                    var Dead_rate = province.data.map(function(m_data){
-                        return (m_data.dead/m_data.confirm).toFixed(4);;
-                    })
-                        option = {
-                            tooltip: {
-                                trigger: 'axis',
-                                axisPointer: {
-                                    type: 'shadow',
-                                    label: {
-                                        show: true
-                                    }
-                                }
-                            },
-                            toolbox: {
-                                show: true,
-                                feature: {
-                                    restore: {show: true},
-                                    saveAsImage: {show: true}
-                                },
-                                right:'4%'
-                            },
-                            calculable: true,
-                            legend: {
-                                data: ['治愈率', '死亡率'],
-                                itemGap: 5
-                            },
-                            grid: {
-                                top: '12%',
-                                left: '1%',
-                                right: '10%',
-                                containLabel: true
-                            },
-                            xAxis: [
-                                {
-                                    type: 'category',
-                                    data: dates
-                                }
-                            ],
-                            yAxis: [
-                                {
-                                    type: 'value',
-                                    name: '比率',
-                                },
-                                {
-                                    type: 'value',
-                                    name: '比率',
-                                }
-                            ],
-
-                            dataZoom: [
-                                {
-                                    show: true,
-                                    start: 0,
-                                    end: 100
-                                },
-                                {
-                                    type: 'inside',
-                                    start: 50,
-                                    end: 100
-                                },
-                                /*{
-                                    show: true,
-                                    yAxisIndex: 0,
-                                    filterMode: 'empty',
-                                    width: 30,
-                                    height: '80%',
-                                    showDataShadow: false,
-                                    left: '93%'
-                                }*/
-                            ],
-                            series: [
-                                {
-                                    name: '治愈率',
-                                    type: 'line',
-                                    data: Heal_rate,
-                                    itemStyle:{
-                                        normal:{
-                                            color:'#00FA9A'
-                                        }
-                                    }
-                                },
-                                {
-                                    name: '死亡率',
-                                    type: 'line',
-                                    data: Dead_rate,
+                                    data: seir_ch,
                                     itemStyle:{
                                         normal:{
                                             color:'#191970'
                                         }
                                     }
-                                }
+                                },
                             ]
                         };
+
                        myChart4.setOption(option);
-                });
-        }
+						
+					}
+				});
+						//console.log(day);
+            
+            
+     }
+     
    </script>
 
 
