@@ -1,0 +1,223 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>疫情可视化</title>
+    
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="assets/materialize/css/materialize.min.css" media="screen,projection" />
+    <!-- Bootstrap Styles-->
+    <link href="assets/css/bootstrap.css" rel="stylesheet" />
+    <!-- FontAwesome Styles-->
+    <link href="assets/css/font-awesome.css" rel="stylesheet" />
+    <!-- Morris Chart Styles-->
+    <link href="assets/js/morris/morris-0.4.3.min.css" rel="stylesheet" />
+    <!-- Custom Styles-->
+    <link href="assets/css/custom-styles.css" rel="stylesheet" />
+    <!-- Google Fonts-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" href="assets/js/Lightweight-Chart/cssCharts.css"> 
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.loading.min.js"></script>
+    <script src="assets/js/echarts.min.js"></script>
+    <script src="assets/js/echarts-wordcloud.js"></script>
+    
+</head>
+
+<body>
+<div id="container" style= "width: 1200px;height: 650px;"></div>            
+</body>
+
+<script type="text/javascript">
+function createRandomItemStyle() {
+    return {
+        normal: {
+            color: 'rgb(' + [
+                Math.round(Math.random() * 160),
+                Math.round(Math.random() * 160),
+                Math.round(Math.random() * 160)
+            ].join(',') + ')'
+        }
+    };
+}
+var dom = document.getElementById("container");
+var mychart = echarts.init(dom);
+
+option = {
+    title: {
+        text: '新冠肺炎词云',
+        link: 'http://www.google.com/trends/hottrends'
+    },
+    tooltip: {
+        show: true
+    },
+    series: [{
+        name: '新冠肺炎词云',
+        type: 'wordCloud',
+        size: ['80%', '80%'],
+        textRotation : [0, 45, 90, -45],
+        textPadding: 0,
+        autoSize: {
+            enable: true,
+            minSize: 14
+        },
+        data: [
+{name:"肺炎",value:247,itemStyle: createRandomItemStyle()},
+{name:"疫情",value:252,itemStyle: createRandomItemStyle()},
+{name:"新冠",value:250,itemStyle: createRandomItemStyle()},
+{name:"新冠肺炎",value:247,itemStyle: createRandomItemStyle()},
+{name:"新冠肺炎疫情",value:200,itemStyle: createRandomItemStyle()},
+{name:"防控",value:57,itemStyle: createRandomItemStyle()},
+{name:"疫情防控",value:51,itemStyle: createRandomItemStyle()},
+{name:"新冠肺炎疫情防控",value:39,itemStyle: createRandomItemStyle()},
+{name:"确诊",value:22,itemStyle: createRandomItemStyle()},
+{name:"病例",value:23,itemStyle: createRandomItemStyle()},
+{name:"市新冠肺炎疫情",value:18,itemStyle: createRandomItemStyle()},
+{name:"新增",value:17,itemStyle: createRandomItemStyle()},
+{name:"美国",value:16,itemStyle: createRandomItemStyle()},
+{name:"抗击",value:11,itemStyle: createRandomItemStyle()},
+{name:"指南",value:12,itemStyle: createRandomItemStyle()},
+{name:"报告",value:14,itemStyle: createRandomItemStyle()},
+{name:"抗击新冠肺炎疫情",value:11,itemStyle: createRandomItemStyle()},
+{name:"新冠肺炎确诊病例",value:11,itemStyle: createRandomItemStyle()},
+{name:"患者",value:11,itemStyle: createRandomItemStyle()},
+{name:"技术",value:11,itemStyle: createRandomItemStyle()},
+{name:"聚焦",value:8,itemStyle: createRandomItemStyle()},
+{name:"经济",value:10,itemStyle: createRandomItemStyle()},
+{name:"安徽省",value:8,itemStyle: createRandomItemStyle()},
+{name:"通报",value:8,itemStyle: createRandomItemStyle()},
+{name:"场所",value:8,itemStyle: createRandomItemStyle()},
+{name:"指挥部",value:7,itemStyle: createRandomItemStyle()},
+{name:"驱逐舰",value:6,itemStyle: createRandomItemStyle()},
+{name:"纽约州",value:5,itemStyle: createRandomItemStyle()},
+{name:"感染",value:7,itemStyle: createRandomItemStyle()},
+{name:"冲击",value:6,itemStyle: createRandomItemStyle()},
+{name:"感染者",value:5,itemStyle: createRandomItemStyle()},
+{name:"武汉",value:6,itemStyle: createRandomItemStyle()},
+{name:"内蒙古自治区",value:5,itemStyle: createRandomItemStyle()},
+{name:"日本央行",value:4,itemStyle: createRandomItemStyle()},
+{name:"政府",value:6,itemStyle: createRandomItemStyle()},
+{name:"扩散",value:5,itemStyle: createRandomItemStyle()},
+{name:"暴发",value:6,itemStyle: createRandomItemStyle()},
+{name:"疾控",value:4,itemStyle: createRandomItemStyle()},
+{name:"广州市",value:5,itemStyle: createRandomItemStyle()},
+{name:"儿童",value:5,itemStyle: createRandomItemStyle()},
+{name:"一季度",value:4,itemStyle: createRandomItemStyle()},
+{name:"症状",value:5,itemStyle: createRandomItemStyle()},
+{name:"会议",value:5,itemStyle: createRandomItemStyle()},
+{name:"专家",value:5,itemStyle: createRandomItemStyle()},
+{name:"国际",value:5,itemStyle: createRandomItemStyle()},
+{name:"巴西",value:4,itemStyle: createRandomItemStyle()},
+{name:"日本",value:5,itemStyle: createRandomItemStyle()},
+{name:"双重",value:4,itemStyle: createRandomItemStyle()},
+{name:"缓解",value:4,itemStyle: createRandomItemStyle()},
+{name:"新闻发布会",value:4,itemStyle: createRandomItemStyle()},
+{name:"青少年",value:4,itemStyle: createRandomItemStyle()},
+{name:"海军",value:5,itemStyle: createRandomItemStyle()},
+{name:"时新",value:3,itemStyle: createRandomItemStyle()},
+{name:"荆门市",value:3,itemStyle: createRandomItemStyle()},
+{name:"预防",value:4,itemStyle: createRandomItemStyle()},
+{name:"病毒",value:4,itemStyle: createRandomItemStyle()},
+{name:"死亡",value:4,itemStyle: createRandomItemStyle()},
+{name:"抗疫",value:4,itemStyle: createRandomItemStyle()},
+{name:"预案",value:4,itemStyle: createRandomItemStyle()},
+{name:"行长",value:3,itemStyle: createRandomItemStyle()},
+{name:"近视",value:3,itemStyle: createRandomItemStyle()},
+{name:"土耳其",value:3,itemStyle: createRandomItemStyle()},
+{name:"救治",value:3,itemStyle: createRandomItemStyle()},
+{name:"疑似",value:3,itemStyle: createRandomItemStyle()},
+{name:"重症",value:3,itemStyle: createRandomItemStyle()},
+{name:"重返",value:3,itemStyle: createRandomItemStyle()},
+{name:"住院",value:3,itemStyle: createRandomItemStyle()},
+{name:"指引",value:3,itemStyle: createRandomItemStyle()},
+{name:"一带一路",value:3,itemStyle: createRandomItemStyle()},
+{name:"常态化",value:3,itemStyle: createRandomItemStyle()},
+{name:"贵州省",value:3,itemStyle: createRandomItemStyle()},
+{name:"公园",value:3,itemStyle: createRandomItemStyle()},
+{name:"治疗",value:4,itemStyle: createRandomItemStyle()},
+{name:"黑田",value:3,itemStyle: createRandomItemStyle()},
+{name:"重庆市",value:3,itemStyle: createRandomItemStyle()},
+{name:"纽约",value:3,itemStyle: createRandomItemStyle()},
+{name:"学校",value:4,itemStyle: createRandomItemStyle()},
+{name:"餐厅",value:3,itemStyle: createRandomItemStyle()},
+{name:"压力",value:3,itemStyle: createRandomItemStyle()},
+{name:"数据",value:3,itemStyle: createRandomItemStyle()},
+{name:"使馆",value:3,itemStyle: createRandomItemStyle()},
+{name:"俄罗斯",value:3,itemStyle: createRandomItemStyle()},
+{name:"王毅",value:2,itemStyle: createRandomItemStyle()},
+{name:"自治区",value:3,itemStyle: createRandomItemStyle()},
+{name:"国庆日",value:2,itemStyle: createRandomItemStyle()},
+{name:"一路",value:3,itemStyle: createRandomItemStyle()},
+{name:"金砖",value:2,itemStyle: createRandomItemStyle()},
+{name:"基德",value:3,itemStyle: createRandomItemStyle()},
+{name:"复工",value:2,itemStyle: createRandomItemStyle()},
+{name:"组织",value:3,itemStyle: createRandomItemStyle()},
+{name:"外长",value:2,itemStyle: createRandomItemStyle()},
+{name:"小组",value:3,itemStyle: createRandomItemStyle()},
+{name:"第一线",value:3,itemStyle: createRandomItemStyle()},
+{name:"公民",value:3,itemStyle: createRandomItemStyle()},
+{name:"领导",value:3,itemStyle: createRandomItemStyle()},
+{name:"省区市",value:2,itemStyle: createRandomItemStyle()},
+{name:"培训",value:3,itemStyle: createRandomItemStyle()},
+{name:"调度会",value:2,itemStyle: createRandomItemStyle()},
+{name:"济宁市",value:2,itemStyle: createRandomItemStyle()},
+{name:"拐点",value:2,itemStyle: createRandomItemStyle()},
+{name:"海南",value:3,itemStyle: createRandomItemStyle()},
+{name:"约翰逊",value:2,itemStyle: createRandomItemStyle()},
+{name:"国家统计局",value:2,itemStyle: createRandomItemStyle()},
+{name:"增速",value:2,itemStyle: createRandomItemStyle()},
+{name:"惠州市",value:2,itemStyle: createRandomItemStyle()},
+{name:"欧元",value:2,itemStyle: createRandomItemStyle()},
+{name:"低迷",value:2,itemStyle: createRandomItemStyle()},
+{name:"谣言",value:2,itemStyle: createRandomItemStyle()},
+{name:"首相",value:2,itemStyle: createRandomItemStyle()},
+{name:"旅游业",value:2,itemStyle: createRandomItemStyle()},
+{name:"荷兰",value:2,itemStyle: createRandomItemStyle()},
+{name:"印发",value:2,itemStyle: createRandomItemStyle()},
+{name:"庆祝",value:2,itemStyle: createRandomItemStyle()},
+{name:"泰国",value:2,itemStyle: createRandomItemStyle()},
+{name:"不妙",value:2,itemStyle: createRandomItemStyle()},
+{name:"增多",value:2,itemStyle: createRandomItemStyle()},
+{name:"出席",value:2,itemStyle: createRandomItemStyle()},
+{name:"真相",value:2,itemStyle: createRandomItemStyle()},
+{name:"印度",value:2,itemStyle: createRandomItemStyle()},
+{name:"复产",value:2,itemStyle: createRandomItemStyle()},
+{name:"非洲",value:2,itemStyle: createRandomItemStyle()},
+{name:"张伯",value:2,itemStyle: createRandomItemStyle()},
+{name:"研究部",value:2,itemStyle: createRandomItemStyle()},
+{name:"案件",value:2,itemStyle: createRandomItemStyle()},
+{name:"向好",value:2,itemStyle: createRandomItemStyle()},
+{name:"海外",value:2,itemStyle: createRandomItemStyle()},
+{name:"法国",value:2,itemStyle: createRandomItemStyle()},
+{name:"医疗",value:2,itemStyle: createRandomItemStyle()},
+{name:"老人",value:2,itemStyle: createRandomItemStyle()},
+{name:"增长",value:2,itemStyle: createRandomItemStyle()},
+{name:"香港",value:2,itemStyle: createRandomItemStyle()},
+{name:"观察",value:2,itemStyle: createRandomItemStyle()},
+{name:"放松",value:2,itemStyle: createRandomItemStyle()},
+{name:"通告",value:2,itemStyle: createRandomItemStyle()},
+{name:"保障",value:2,itemStyle: createRandomItemStyle()},
+{name:"广东",value:2,itemStyle: createRandomItemStyle()},
+{name:"公开",value:2,itemStyle: createRandomItemStyle()},
+{name:"卫生",value:2,itemStyle: createRandomItemStyle()},
+{name:"隔离",value:2,itemStyle: createRandomItemStyle()},
+{name:"回应",value:2,itemStyle: createRandomItemStyle()},
+{name:"岗位",value:2,itemStyle: createRandomItemStyle()},
+{name:"人数",value:2,itemStyle: createRandomItemStyle()},
+{name:"健康",value:2,itemStyle: createRandomItemStyle()},
+{name:"特别奖",value:2,itemStyle: createRandomItemStyle()},
+{name:"中西医",value:2,itemStyle: createRandomItemStyle()},
+{name:"野火",value:2,itemStyle: createRandomItemStyle()},
+{name:"办公室",value:2,itemStyle: createRandomItemStyle()},
+{name:"美元",value:2,itemStyle: createRandomItemStyle()},
+{name:"大专院校",value:2,itemStyle: createRandomItemStyle()},
+{name:"疫苗",value:2,itemStyle: createRandomItemStyle()}
+        ]
+    }]
+};
+
+mychart.setOption(option);
+</script> 
+</html>
