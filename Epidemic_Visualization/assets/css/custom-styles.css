@@ -28,6 +28,12 @@ body {
     padding: 15px 30px;
     min-height:1200px;
 }
+#page-inner2 {
+    width:100%;
+    margin:10px 20px 10px 0px;
+    padding: 15px 30px;
+    min-height:700px;
+}
 .header .container-fluid{
 padding:0;
 }
