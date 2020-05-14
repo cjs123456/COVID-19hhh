@@ -194,10 +194,11 @@
     var state=["Alaska","Alabama","Arkansas","Arizona","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Iowa","Idaho","Illinois","Indiana","Kansas","Kentucky","Louisiana","Massachusetts","Maryland","Maine","Michigan","Minnesota","Missouri","Mississippi","Montana","North Carolina","North Dakota","Nebraska","New Hampshire Hampshire","New Jersey","New Mexico","Nevada","New York","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Virginia","Vermont","Washington","Wisconsin","West Virginia","Wyoming"];
         $.ajax({
             type:"GET",
-            url: "http://localhost:8081/COVID-19/USA/all", 
-            dataType: "json",  
+            url: "data/data_USA.csv", 
+            //url: "http://localhost:8081/COVID-19/USA/all",
+            //dataType: "json",  
             success: function(results) {
-            	var k=1;
+            	/*var k=1;
             	date[k-1]=3.12;
             	Confirms[k-1] = new Array();
             	for(var j = 0; j < 50; j++) {
@@ -216,9 +217,10 @@
             		if(l==50) l=0;
                     Confirms[k-1][l]=n.confirm; 
                     l++;
-            	});
-                /*//转变为字符串
-                var rs = new String(results);         
+            	});*/
+                //转变为字符串
+                var rs = new String(results);
+                console.log(rs);  
                 var n_date = 0;
                 rs=rs.split("\n");
                 for (var i = 0; i < rs.length; i++) {
@@ -226,20 +228,20 @@
                 } 
 
                 //数组初始化
-                var L = parseInt((rs.length-1)/34);
+                var L = parseInt((rs.length-1)/50);
                 for(var i = 0; i < L; i++) {
                             date[i] = '';
                             Confirms[i] = new Array();
-                            for(var j = 0; j < 34; j++) {
+                            for(var j = 0; j < 50; j++) {
                                 Confirms[i][j] = 0; //0表示只有一个空的红圈
                         }
                     } 
 
 
                 //获取值   
-                for (var i = 1; i < rs.length-1; i+=34) {
-                    date[n_date]=rs[i][1];
-                    for(var j = 0;j<34;j++){
+                for (var i = 1; i < rs.length-1; i+=50) {
+                    date[n_date]=rs[i][0];
+                    for(var j = 0;j<50;j++){
                          Confirms[n_date][j]=rs[i+j][2]; 
                     }
 
@@ -248,7 +250,7 @@
                          Confirms[n_date]=Confirms[n_date].map(Number)
                     }                  
                     n_date++;
-                }*/
+                }
 
 
                 var days=date;
@@ -521,10 +523,11 @@
     var state=["Alaska","Alabama","Arkansas","Arizona","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Iowa","Idaho","Illinois","Indiana","Kansas","Kentucky","Louisiana","Massachusetts","Maryland","Maine","Michigan","Minnesota","Missouri","Mississippi","Montana","North Carolina","North Dakota","Nebraska","New Hampshire Hampshire","New Jersey","New Mexico","Nevada","New York","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Virginia","Vermont","Washington","Wisconsin","West Virginia","Wyoming"];
         $.ajax({
             type:"GET",
-            url: "http://localhost:8081/COVID-19/USA/all",
-            dataType: "json",  
+            url: "data/data_USA.csv", 
+            //url: "http://localhost:8081/COVID-19/USA/all",
+            //dataType: "json",  
             success: function(results) {
-            	var k=1;
+            	/*var k=1;
             	date[k-1]=3.12;
             	Confirms[k-1] = new Array();
             	for(var j = 0; j < 50; j++) {
@@ -543,9 +546,9 @@
             		if(l==50) l=0;
                     Confirms[k-1][l]=n.heal; 
                     l++;
-            	});
-                /*//转变为字符串
-                var rs = new String(results);         
+            	});*/
+               var rs = new String(results);
+                console.log(rs);  
                 var n_date = 0;
                 rs=rs.split("\n");
                 for (var i = 0; i < rs.length; i++) {
@@ -553,18 +556,20 @@
                 } 
 
                 //数组初始化
-                var L = parseInt((rs.length-1)/34);
+                var L = parseInt((rs.length-1)/50);
                 for(var i = 0; i < L; i++) {
                             date[i] = '';
                             Confirms[i] = new Array();
-                            for(var j = 0; j < 34; j++) {
+                            for(var j = 0; j < 50; j++) {
                                 Confirms[i][j] = 0; //0表示只有一个空的红圈
                         }
                     } 
+
+
                 //获取值   
-                for (var i = 1; i < rs.length-1; i+=34) {
-                    date[n_date]=rs[i][1];
-                    for(var j = 0;j<34;j++){
+                for (var i = 1; i < rs.length-1; i+=50) {
+                    date[n_date]=rs[i][0];
+                    for(var j = 0;j<50;j++){
                          Confirms[n_date][j]=rs[i+j][4]; 
                     }
 
@@ -573,7 +578,7 @@
                          Confirms[n_date]=Confirms[n_date].map(Number)
                     }                  
                     n_date++;
-                }*/
+                }
 
 
                 var days=date;
@@ -843,10 +848,11 @@
     var state=["Alaska","Alabama","Arkansas","Arizona","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Iowa","Idaho","Illinois","Indiana","Kansas","Kentucky","Louisiana","Massachusetts","Maryland","Maine","Michigan","Minnesota","Missouri","Mississippi","Montana","North Carolina","North Dakota","Nebraska","New Hampshire Hampshire","New Jersey","New Mexico","Nevada","New York","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Virginia","Vermont","Washington","Wisconsin","West Virginia","Wyoming"];
         $.ajax({
             type:"GET",
-            url: "http://localhost:8081/COVID-19/USA/all",
-            dataType: "json", 
+            url: "data/data_USA.csv",
+            //url: "http://localhost:8081/COVID-19/USA/all",
+            //dataType: "json", 
             success: function(results) {
-            	var k=1;
+            	/*var k=1;
             	date[k-1]=3.12;
             	Confirms[k-1] = new Array();
             	for(var j = 0; j < 50; j++) {
@@ -865,9 +871,9 @@
             		if(l==50) l=0;
                     Confirms[k-1][l]=n.dead; 
                     l++;
-            	});
-                /*//转变为字符串
-                var rs = new String(results);         
+            	});*/
+               var rs = new String(results);
+                console.log(rs);  
                 var n_date = 0;
                 rs=rs.split("\n");
                 for (var i = 0; i < rs.length; i++) {
@@ -875,19 +881,21 @@
                 } 
 
                 //数组初始化
-                var L = parseInt((rs.length-1)/34);
+                var L = parseInt((rs.length-1)/50);
                 for(var i = 0; i < L; i++) {
                             date[i] = '';
                             Confirms[i] = new Array();
-                            for(var j = 0; j < 34; j++) {
+                            for(var j = 0; j < 50; j++) {
                                 Confirms[i][j] = 0; //0表示只有一个空的红圈
                         }
                     } 
+
+
                 //获取值   
-                for (var i = 1; i < rs.length-1; i+=34) {
-                    date[n_date]=rs[i][1];
-                    for(var j = 0;j<34;j++){
-                         Confirms[n_date][j]=rs[i+j][3]; 
+                for (var i = 1; i < rs.length-1; i+=50) {
+                    date[n_date]=rs[i][0];
+                    for(var j = 0;j<50;j++){
+                         Confirms[n_date][j]=rs[i+j][5]; 
                     }
 
                     //将字符数组转换为数字数组
@@ -895,7 +903,7 @@
                          Confirms[n_date]=Confirms[n_date].map(Number)
                     }                  
                     n_date++;
-                }*/
+                }
 
 
                 var days=date;
